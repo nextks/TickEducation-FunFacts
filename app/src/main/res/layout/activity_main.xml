@@ -40,10 +40,10 @@
         android:orientation="horizontal">
 
         <Button
-            android:layout_weight="1"
             android:id="@+id/show_another_fact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="Show Another Fun Fact"
             android:textColor="@color/light_blue"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -52,10 +52,10 @@
 
         <Button
             android:id="@+id/show_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Show Another Fun Fact"
+            android:text="Show All Facts"
             android:textColor="@color/light_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
