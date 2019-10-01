@@ -27,16 +27,18 @@ public class AllFactActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter =
         new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, facts);
 
-    listView.setAdapter(adapter);
 
-    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(AllFactActivity.this, "You have selected item: " + position, Toast.LENGTH_SHORT).show();
       }
-    });
+    });*/
 
 
     FactAdapter ourAdapter = new FactAdapter(this,facts);
+
+    listView.setAdapter(ourAdapter);
+
   }
 }
