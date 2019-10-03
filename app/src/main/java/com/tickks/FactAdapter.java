@@ -36,11 +36,13 @@ public class FactAdapter extends BaseAdapter {
     return 0;
   }
 
+  int indexImage;
+
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
     View view = LayoutInflater.from(activity).inflate(R.layout.fact_item, null);
 
-    ImageView icon  = view.findViewById(R.id.imageView);
+    ImageView icon = view.findViewById(R.id.imageView);
 
     String fact = list[position];
 
@@ -51,10 +53,29 @@ public class FactAdapter extends BaseAdapter {
       String c = colors[i];
       if()
     }*/
+
+    int imageResource;
+
+   /* if(position % 2 == 0){
+      imageResource = R.drawable.ic_brightness_3_black_24dp;
+    }else {
+      imageResource = R.drawable.ic_directions_car_black_24dp;
+    }*/
+
+    int[] images = {R.drawable.ic_directions_car_black_24dp, R.drawable.ic_brightness_3_black_24dp};
+
+
+    imageResource = images[indexImage];
+    indexImage++;
+    if (indexImage >= images.length) {
+      indexImage = 0;
+
+    }
+
+
     int index = position % colors.length;
 
     String color = colors[index];
-
 
 
     view.setBackgroundColor(Color.parseColor(color));
@@ -63,7 +84,7 @@ public class FactAdapter extends BaseAdapter {
     title.setText(fact);
 
 
-    icon.setImageResource(R.drawable.ic_brightness_3_black_24dp);
+    icon.setImageResource(imageResource);
 
 
     return view;
