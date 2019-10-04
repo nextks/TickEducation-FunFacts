@@ -24,6 +24,7 @@ public class AllFactFragment extends Fragment {
 
 
   private FactFactory factFactory = new FactFactory();
+  private FactAdapter ourAdapter;
 
   public AllFactFragment() {
     // Required empty public constructor
@@ -58,7 +59,7 @@ public class AllFactFragment extends Fragment {
     }
   });*/
 
-    FactAdapter ourAdapter = new FactAdapter(getActivity(), facts);
+    ourAdapter = new FactAdapter(getActivity(), facts);
 
     listView.setAdapter(ourAdapter);
 
@@ -74,6 +75,15 @@ public class AllFactFragment extends Fragment {
       }
     });
 
+    ourAdapter.notifyDataSetChanged();
 
+
+  }
+
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    ourAdapter.notifyDataSetChanged();
   }
 }

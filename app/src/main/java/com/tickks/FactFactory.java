@@ -11,7 +11,7 @@ public class FactFactory {
       "Bletat mujn me flutur me lart se Mali Everest", "Bebet kane 100 eshtra me shume se te rriturit"};
 
 
-  ArrayList<String> newFaktet = new ArrayList<>();
+  static ArrayList<String> newFaktet = new ArrayList<>();
 
 
   public FactFactory() {
