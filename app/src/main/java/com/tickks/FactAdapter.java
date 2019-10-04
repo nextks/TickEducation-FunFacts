@@ -9,26 +9,28 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class FactAdapter extends BaseAdapter {
 
   private Activity activity;
-  String[] list;
+  ArrayList<String> list;
   ColorFactory colorFactory = new ColorFactory();
   String[] colors = colorFactory.colors;
 
-  public FactAdapter(Activity activity, String[] list) {
+  public FactAdapter(Activity activity, ArrayList<String> list) {
     this.activity = activity;
     this.list = list;
   }
 
   @Override
   public int getCount() {
-    return list.length;
+    return list.size();
   }
 
   @Override
   public String getItem(int position) {
-    return list[position];
+    return list.get(position);
   }
 
   @Override
@@ -44,7 +46,7 @@ public class FactAdapter extends BaseAdapter {
 
     ImageView icon = view.findViewById(R.id.imageView);
 
-    String fact = list[position];
+    String fact = list.get(position);
 
 
 

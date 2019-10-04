@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,7 +45,7 @@ public class AllFactFragment extends Fragment {
 
     ListView listView = view.findViewById(R.id.list_view);
 
-    String[] facts = factFactory.faktet;
+    ArrayList<String> facts = factFactory.getFacts();
 
    /* ArrayAdapter<String> adapter =
         new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, facts);
@@ -66,7 +68,8 @@ public class AllFactFragment extends Fragment {
         Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_SHORT).show();
         getFragmentManager()
             .beginTransaction()
-            .replace(R.id.main_layout,new AddFact(), "ADD_NEW")
+            .replace(R.id.main_layout, new AddFact(), "ADD_NEW")
+            .addToBackStack(null)
             .commit();
       }
     });
