@@ -51,12 +51,30 @@ public class AddFact extends Fragment {
       @Override
       public void onClick(View v) {
         String newFact = addFactText.getText().toString();
-        Toast.makeText(getActivity(), newFact, Toast.LENGTH_SHORT).show();
-        FactFactory factory = new FactFactory();
-        factory.addFact(newFact);
-        getActivity().onBackPressed();
+
+        if (validate(newFact)) {
+          addFact(newFact);
+        } else {
+          addFactText.setError("The fact should have more then 5 characters");
+        }
       }
     });
 
+  }
+
+  private boolean validate(String newFact) {
+    Toast.makeText(getActivity(), newFact, Toast.LENGTH_SHORT).show();
+    newFact = newFact.trim();
+    if (newFact.length() < 5) {
+      return false;
+    }
+    return true;
+
+  }
+
+  private void addFact(String newFact) {
+    FactFactory factory = new FactFactory(getActivity().getApplicationContext());
+    factory.addFact(newFact);
+    getActivity().onBackPressed();
   }
 }

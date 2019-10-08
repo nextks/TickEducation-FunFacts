@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class AllFactFragment extends Fragment {
 
 
-  private FactFactory factFactory = new FactFactory();
+  private FactFactory factFactory;
   private FactAdapter ourAdapter;
 
   public AllFactFragment() {
@@ -41,6 +41,8 @@ public class AllFactFragment extends Fragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+
+    factFactory = new FactFactory(getContext().getApplicationContext());
 
     FloatingActionButton button = view.findViewById(R.id.fab);
 

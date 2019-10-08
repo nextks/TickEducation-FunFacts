@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-  FactFactory factFactory = new FactFactory();
+  FactFactory factFactory;
   ColorFactory colorFactory = new ColorFactory();
 
   TextView factText;
@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    factFactory = new FactFactory(getApplicationContext());
 
     factText = findViewById(R.id.fun_fact_view);
     mainView = findViewById(R.id.main_layout);
