@@ -2,18 +2,13 @@ package com.tickks;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.provider.CalendarContract;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
 import androidx.constraintlayout.widget.ConstraintLayout;
-
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    factFactory = new FactFactory(getApplicationContext());
+    factFactory = new FactFactory(this);
 
     factText = findViewById(R.id.fun_fact_view);
     mainView = findViewById(R.id.main_layout);
@@ -38,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     showAllFacts = findViewById(R.id.show_all);
 
 
-    showAnotherFactButton.setOnClickListener( new View.OnClickListener() {
+    showAnotherFactButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         changeFact();
@@ -48,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     showAllFacts.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intent = new Intent(MainActivity.this,AllFactActivity.class);
+        Intent intent = new Intent(MainActivity.this, AllFactActivity.class);
         startActivity(intent);
       }
     });

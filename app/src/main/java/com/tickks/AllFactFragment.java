@@ -42,7 +42,7 @@ public class AllFactFragment extends Fragment {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
-    factFactory = new FactFactory(getContext().getApplicationContext());
+    factFactory = new FactFactory(getContext());
 
     FloatingActionButton button = view.findViewById(R.id.fab);
 

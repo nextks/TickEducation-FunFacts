@@ -73,7 +73,7 @@ public class AddFact extends Fragment {
   }
 
   private void addFact(String newFact) {
-    FactFactory factory = new FactFactory(getActivity().getApplicationContext());
+    FactFactory factory = new FactFactory(getContext());
     factory.addFact(newFact);
     getActivity().onBackPressed();
   }
