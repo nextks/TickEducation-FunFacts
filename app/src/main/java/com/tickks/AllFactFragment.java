@@ -1,6 +1,8 @@
 package com.tickks;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,14 +67,15 @@ public class AllFactFragment extends Fragment {
         Toast.makeText(getActivity(), "You have selected item: " + position, Toast.LENGTH_SHORT).show();
       }
     });
+
+
     listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
       @Override
       public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         String fact = facts.get(position);
         Toast.makeText(getActivity(), fact + position, Toast.LENGTH_SHORT).show();
-        factFactory.delete(fact);
-        getLatestData();
-        ourAdapter.notifyDataSetChanged();
+        areYouSureForDelete(fact);
+
         return false;
       }
     });
@@ -95,6 +98,30 @@ public class AllFactFragment extends Fragment {
     ourAdapter.notifyDataSetChanged();
 
 
+  }
+
+  private void areYouSureForDelete(String fact) {
+    AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+    alert
+        .setTitle("Delete fact!")
+        .setMessage("Are you sure you want to delete this fact")
+        .setNegativeButton("No", null)
+        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            deleteFact(fact);
+          }
+        });
+
+    alert.show();
+
+
+  }
+
+  private void deleteFact(String fact) {
+    factFactory.delete(fact);
+    getLatestData();
+    ourAdapter.notifyDataSetChanged();
   }
 
   private void getLatestData() {
