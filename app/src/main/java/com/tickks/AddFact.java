@@ -36,9 +36,9 @@ public class AddFact extends Fragment {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
-    EditText addFactText = view.findViewById(R.id.add_text);
+    EditText addFactText = view.findViewById(R.id.fact_text);
     Button cancelButton = view.findViewById(R.id.cancel_button);
-    Button addButton = view.findViewById(R.id.add_button);
+    Button addButton = view.findViewById(R.id.update_button);
 
     cancelButton.setOnClickListener(new View.OnClickListener() {
       @Override
