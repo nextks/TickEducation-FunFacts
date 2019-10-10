@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class AllFactFragment extends Fragment {
 
   private FactFactory factFactory;
   private FactAdapter ourAdapter;
+  private ArrayList<String> facts;
 
   public AllFactFragment() {
     // Required empty public constructor
@@ -48,20 +50,33 @@ public class AllFactFragment extends Fragment {
 
     ListView listView = view.findViewById(R.id.list_view);
 
-    ArrayList<String> facts = factFactory.getFacts();
+    facts = factFactory.getFacts();
 
    /* ArrayAdapter<String> adapter =
         new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, facts);
 
 */
-    /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-      Toast.makeText(AllFactActivity.this, "You have selected item: " + position, Toast.LENGTH_SHORT).show();
-    }
-  });*/
 
     ourAdapter = new FactAdapter(getActivity(), facts);
+
+    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(getActivity(), "You have selected item: " + position, Toast.LENGTH_SHORT).show();
+      }
+    });
+    listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+      @Override
+      public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        String fact = facts.get(position);
+        Toast.makeText(getActivity(), fact + position, Toast.LENGTH_SHORT).show();
+        factFactory.delete(fact);
+        getLatestData();
+        ourAdapter.notifyDataSetChanged();
+        return false;
+      }
+    });
+
 
     listView.setAdapter(ourAdapter);
 
@@ -80,6 +95,11 @@ public class AllFactFragment extends Fragment {
     ourAdapter.notifyDataSetChanged();
 
 
+  }
+
+  private void getLatestData() {
+    facts = factFactory.getFacts();
+    ourAdapter.list = facts;
   }
 
 
