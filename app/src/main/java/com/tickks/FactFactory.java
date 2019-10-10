@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
@@ -97,6 +96,21 @@ public class FactFactory {
     for (String fact : stringSet) {
       if (fact.equals(factToDelete)) {
         stringSet.remove(fact);
+        break;
+      }
+    }
+    sharedPreferences.edit().putStringSet(KEY, stringSet).apply();
+
+  }
+
+  public void updateFact(String oldFact, String newFact) {
+    Set<String> stringSet = sharedPreferences.getStringSet(KEY, null);
+    sharedPreferences.edit().clear().apply();
+
+    for (String fact : stringSet) {
+      if (fact.equals(oldFact)) {
+        stringSet.remove(fact);
+        stringSet.add(newFact);
         break;
       }
     }

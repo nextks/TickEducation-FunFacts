@@ -65,6 +65,20 @@ public class AllFactFragment extends Fragment {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(getActivity(), "You have selected item: " + position, Toast.LENGTH_SHORT).show();
+
+        String fact = facts.get(position);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("FACT",fact);
+
+        UpdateFactFragment updateFactFragment = new UpdateFactFragment();
+        updateFactFragment.setArguments(bundle);
+
+        getFragmentManager()
+            .beginTransaction()
+            .replace(R.id.main_layout,updateFactFragment, "UPDATE_FACT")
+            .addToBackStack(null)
+            .commit();
       }
     });
 
