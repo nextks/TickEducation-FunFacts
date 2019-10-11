@@ -19,7 +19,6 @@ import androidx.fragment.app.Fragment;
  */
 public class AddFact extends Fragment {
 
-
   public AddFact() {
     // Required empty public constructor
   }
