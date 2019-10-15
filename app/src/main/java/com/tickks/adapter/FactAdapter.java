@@ -1,4 +1,4 @@
-package com.tickks;
+package com.tickks.adapter;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -9,6 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.tickks.R;
+import com.tickks.factory.ColorFactory;
+
 import java.util.ArrayList;
 
 public class FactAdapter extends BaseAdapter {
@@ -16,10 +19,18 @@ public class FactAdapter extends BaseAdapter {
   private Activity activity;
   ArrayList<String> list;
   ColorFactory colorFactory = new ColorFactory();
-  String[] colors = colorFactory.colors;
+  String[] colors = colorFactory.getColors();
 
   public FactAdapter(Activity activity, ArrayList<String> list) {
     this.activity = activity;
+    this.list = list;
+  }
+
+  public ArrayList<String> getList() {
+    return list;
+  }
+
+  public void setList(ArrayList<String> list) {
     this.list = list;
   }
 

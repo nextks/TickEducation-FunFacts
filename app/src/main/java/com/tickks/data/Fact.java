@@ -7,7 +7,14 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "fact")
 public class Fact {
 
-  @PrimaryKey
+  public Fact() {
+  }
+
+  public Fact(String text) {
+    this.text = text;
+  }
+
+  @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "id")
   private int id;
   @ColumnInfo(name = "fact_text")

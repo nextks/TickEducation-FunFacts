@@ -1,4 +1,4 @@
-package com.tickks;
+package com.tickks.fragment;
 
 
 import android.app.AlertDialog;
@@ -16,6 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.tickks.R;
+import com.tickks.adapter.FactAdapter;
+import com.tickks.factory.FactFactory;
 
 import java.util.ArrayList;
 
@@ -69,14 +72,14 @@ public class AllFactFragment extends Fragment {
         String fact = facts.get(position);
 
         Bundle bundle = new Bundle();
-        bundle.putString("FACT",fact);
+        bundle.putString("FACT", fact);
 
         UpdateFactFragment updateFactFragment = new UpdateFactFragment();
         updateFactFragment.setArguments(bundle);
 
         getFragmentManager()
             .beginTransaction()
-            .replace(R.id.main_layout,updateFactFragment, "UPDATE_FACT")
+            .replace(R.id.main_layout, updateFactFragment, "UPDATE_FACT")
             .addToBackStack(null)
             .commit();
       }
@@ -103,7 +106,7 @@ public class AllFactFragment extends Fragment {
         Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_SHORT).show();
         getFragmentManager()
             .beginTransaction()
-            .replace(R.id.main_layout, new AddFact(), "ADD_NEW")
+            .replace(R.id.main_layout, new AddFactFragment(), "ADD_NEW")
             .addToBackStack(null)
             .commit();
       }
@@ -140,7 +143,7 @@ public class AllFactFragment extends Fragment {
 
   private void getLatestData() {
     facts = factFactory.getFacts();
-    ourAdapter.list = facts;
+    ourAdapter.setList(facts);
   }
 
 

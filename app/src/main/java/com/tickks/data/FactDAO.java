@@ -1,6 +1,7 @@
 package com.tickks.data;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -14,9 +15,14 @@ public interface FactDAO {
   List<Fact> getFacts();
 
   @Insert
-  int saveFact(Fact fact);
+  void saveFact(Fact fact);
+
+  @Insert
+  void saveAllFact(List<Fact> facts);
 
   @Update
   void updateFact(Fact fact);
 
+  @Delete
+  void deleteFact(Fact fact);
 }

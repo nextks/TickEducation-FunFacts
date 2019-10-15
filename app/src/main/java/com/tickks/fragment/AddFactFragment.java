@@ -1,4 +1,4 @@
-package com.tickks;
+package com.tickks.fragment;
 
 
 import android.os.Bundle;
@@ -13,13 +13,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.tickks.R;
+import com.tickks.factory.FactFactory;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AddFact extends Fragment {
+public class AddFactFragment extends Fragment {
 
-  public AddFact() {
+  public AddFactFragment() {
     // Required empty public constructor
   }
 

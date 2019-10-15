@@ -1,10 +1,12 @@
-package com.tickks;
+package com.tickks.activity;
 
 import android.os.Bundle;
-import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+
+import com.tickks.fragment.AllFactFragment;
+import com.tickks.R;
 
 public class AllFactActivity extends AppCompatActivity {
 

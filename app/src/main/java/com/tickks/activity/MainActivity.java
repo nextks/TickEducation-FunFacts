@@ -1,4 +1,4 @@
-package com.tickks;
+package com.tickks.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.tickks.R;
+import com.tickks.factory.ColorFactory;
+import com.tickks.factory.FactFactory;
 
 public class MainActivity extends AppCompatActivity {
 

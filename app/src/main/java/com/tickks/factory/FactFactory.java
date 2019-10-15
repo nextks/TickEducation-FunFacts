@@ -1,10 +1,14 @@
-package com.tickks;
+package com.tickks.factory;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.tickks.data.Database;
+import com.tickks.data.Fact;
+
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -22,6 +26,7 @@ public class FactFactory {
 
   private static ArrayList<String> newFaktet;
   private final SharedPreferences sharedPreferences;
+  private final Database database;
 
 
   public FactFactory(Context context) {
@@ -40,7 +45,27 @@ public class FactFactory {
     savedFacts = sharedPreferences.getStringSet(KEY, null);
 
 
-    newFaktet = getFactsAsArrayList(savedFacts);
+    database = Database.getDatabase(context);
+
+
+    List<Fact> facts = database.factDao().getFacts();
+
+    if (facts.size() == 0) {
+      List<Fact> factList = new ArrayList<>();
+
+      for (String savedFact : savedFacts) {
+        Fact fact = new Fact();
+        fact.setText(savedFact);
+        factList.add(fact);
+      }
+
+      database.factDao().saveAllFact(factList);
+
+      facts = database.factDao().getFacts();
+    }
+
+
+    newFaktet = getFactAsStrings(facts);
 
    /* if (newFaktet.size() == 0) {
       for (String fact : faktet) {
@@ -66,12 +91,18 @@ public class FactFactory {
   }
 
   public ArrayList<String> getFacts() {
-    Set<String> savedFacts = sharedPreferences.getStringSet(KEY, null);
-
-
-    newFaktet = getFactsAsArrayList(savedFacts);
+    List<Fact> facts = database.factDao().getFacts();
+    newFaktet = getFactAsStrings(facts);
 
     return newFaktet;
+  }
+
+  private ArrayList<String> getFactAsStrings(List<Fact> facts) {
+    ArrayList<String> stringFacts = new ArrayList<>();
+    for (Fact fact : facts) {
+      stringFacts.add(fact.getText());
+    }
+    return stringFacts;
   }
 
   public String getFact() {
@@ -83,15 +114,19 @@ public class FactFactory {
   }
 
   public void addFact(String newFact) {
-    Set<String> stringSet = sharedPreferences.getStringSet(KEY, null);
+    /*Set<String> stringSet = sharedPreferences.getStringSet(KEY, null);
     stringSet.add(newFact);
     sharedPreferences.edit().clear().apply();
     sharedPreferences.edit().putStringSet(KEY, stringSet).apply();
-    newFaktet = getFactsAsArrayList(stringSet);
+    newFaktet = getFactsAsArrayList(stringSet);*/
+
+    database.factDao().saveFact(new Fact(newFact));
+
+
   }
 
   public void delete(String factToDelete) {
-    Set<String> stringSet = sharedPreferences.getStringSet(KEY, null);
+    /*Set<String> stringSet = sharedPreferences.getStringSet(KEY, null);
     sharedPreferences.edit().clear().apply();
     for (String fact : stringSet) {
       if (fact.equals(factToDelete)) {
@@ -99,12 +134,29 @@ public class FactFactory {
         break;
       }
     }
-    sharedPreferences.edit().putStringSet(KEY, stringSet).apply();
+    sharedPreferences.edit().putStringSet(KEY, stringSet).apply();*/
+
+    List<Fact> facts = database.factDao().getFacts();
+
+    for (Fact fact : facts) {
+      if (factToDelete.equals(fact.getText())) {
+        database.factDao().deleteFact(fact);
+        break;
+      }
+    }
+
 
   }
 
+  //CRUD
+  // CREATE / INSERT
+  // Read / Get All
+  // Update / update
+  // Delete / Delete
+
+
   public void updateFact(String oldFact, String newFact) {
-    Set<String> stringSet = sharedPreferences.getStringSet(KEY, null);
+   /* Set<String> stringSet = sharedPreferences.getStringSet(KEY, null);
     sharedPreferences.edit().clear().apply();
 
     for (String fact : stringSet) {
@@ -114,7 +166,18 @@ public class FactFactory {
         break;
       }
     }
-    sharedPreferences.edit().putStringSet(KEY, stringSet).apply();
+    sharedPreferences.edit().putStringSet(KEY, stringSet).apply();*/
+
+
+    List<Fact> facts = database.factDao().getFacts();
+
+    for (Fact fact : facts) {
+      if (oldFact.equals(fact.getText())) {
+        fact.setText(newFact);
+        database.factDao().updateFact(fact);
+        break;
+      }
+    }
 
   }
 }
