@@ -6,13 +6,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.tickks.R;
+import com.tickks.data.Fact;
 import com.tickks.factory.ColorFactory;
 import com.tickks.factory.FactFactory;
+import com.tickks.network.FunFactsService;
+import com.tickks.network.RetrofitBuilder;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +63,30 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
+    getFunFactFromInternet();
 
+  }
+
+  private void getFunFactFromInternet() {
+    Retrofit retrofit = RetrofitBuilder.retrofit;
+
+    FunFactsService funFacts = retrofit.create(FunFactsService.class);
+
+    funFacts.getAllFacts().enqueue(new Callback<List<Fact>>() {
+      @Override
+      public void onResponse(Call<List<Fact>> call, Response<List<Fact>> response) {
+        if (response.isSuccessful()) {
+          Toast.makeText(MainActivity.this, response.body().get(3).getText(), Toast.LENGTH_SHORT).show();
+        } else {
+          Toast.makeText(MainActivity.this, "Please check your request or server", Toast.LENGTH_SHORT).show();
+        }
+      }
+
+      @Override
+      public void onFailure(Call<List<Fact>> call, Throwable t) {
+        Toast.makeText(MainActivity.this, "Please check your internet connection", Toast.LENGTH_SHORT).show();
+      }
+    });
   }
 
   private void changeFact() {
