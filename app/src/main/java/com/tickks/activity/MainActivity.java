@@ -76,7 +76,9 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onResponse(Call<List<Fact>> call, Response<List<Fact>> response) {
         if (response.isSuccessful()) {
-          Toast.makeText(MainActivity.this, response.body().get(3).getText(), Toast.LENGTH_SHORT).show();
+          List<Fact> factList = response.body();
+          factFactory.addFactList(factList);
+          Toast.makeText(MainActivity.this, "List updated", Toast.LENGTH_SHORT).show();
         } else {
           Toast.makeText(MainActivity.this, "Please check your request or server", Toast.LENGTH_SHORT).show();
         }

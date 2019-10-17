@@ -180,4 +180,22 @@ public class FactFactory {
     }
 
   }
+
+  public void addFactList(List<Fact> factList) {
+    List<Fact> factsOnDevice = database.factDao().getFacts();
+
+    for (Fact factOnNetwork : factList) {
+      boolean exist = false;
+      for (Fact factOnDevice : factsOnDevice) {
+        if (factOnNetwork.getText().equals(factOnDevice.getText())) {
+          exist = true;
+        }
+
+      }
+      if (!exist) {
+        factOnNetwork.setId(0);
+        database.factDao().saveFact(factOnNetwork);
+      }
+    }
+  }
 }
