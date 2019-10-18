@@ -1,14 +1,24 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('/Users/granitberisha/Desktop/fun_fact_key')
+            storePassword '123456'
+            keyAlias = 'fun_fact'
+            keyPassword '123456'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.tickks"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -41,4 +51,10 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
 }
+
+apply plugin: 'com.google.gms.google-services'
