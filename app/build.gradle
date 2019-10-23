@@ -1,16 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
-
 
 android {
-    signingConfigs {
-        release {
-            storeFile file('/Users/granitberisha/Desktop/fun_fact_key')
-            storePassword '123456'
-            keyAlias = 'fun_fact'
-            keyPassword '123456'
-        }
-    }
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
@@ -52,9 +42,5 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
 
-    implementation 'com.google.firebase:firebase-analytics:17.2.0'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-
 }
 
-apply plugin: 'com.google.gms.google-services'
